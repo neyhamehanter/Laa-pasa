@@ -72,14 +72,15 @@ const ProductList = () => {
     <Container>
       <Announcement />
       <Navbar />
-      <Title>Filter_Products</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
-        <Filter><FilterText>Filter Products:</FilterText>
-        <Select  name="price" onChange={handleFilters}>
+        <Filter>
+          <FilterText>Filter Products:</FilterText>
+        <Select  name="sort products" onChange={handleFilters}>
         <Option disabled >
                 Available
             </Option>
-            <Option>Combo Offers</Option>
+            <Option>combo offers</Option>
             <Option>new arrivals</Option>
         </Select>
 
@@ -87,12 +88,14 @@ const ProductList = () => {
             <Option disabled >
                 Types
             </Option>
-            <Option>bonesless</Option>
+            <Option>boneless</Option>
             <Option>packed</Option>
             <Option>fresh</Option>
         </Select>
+
+
         </Filter>
-        <Filter><FilterText>Sort Products:</FilterText>
+        <Filter><FilterText>Price:</FilterText>
         
         <Select onChange={e=>setSort(e.target.value)}>
         <Option value ="newest">    newest       

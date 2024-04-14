@@ -1,4 +1,3 @@
-
 import styled from "styled-components"
 import {popularProduct} from "../data"
 import Product from "./Product"
@@ -21,18 +20,19 @@ const Products = ({cat, filters, sort}) => {
   useEffect(()=>{
       const getProducts= async() =>{
         try{
-          // const url = cat ? `http://localhost:5000/api/products?category=${cat}` : "http://localhost:5000/api/products";
-          const url = "http://localhost:5000/api/products";
+          const url = cat ? `http://localhost:5000/api/products?category=${cat}` : "http://localhost:5000/api/products";
           const res = await axios.get(url);
-          console.log(res)
-          setProducts(res.data.products)
-        }catch(err){
+          setProducts(res.data)
+        } catch (err) {
           console.error(err);
+          setProducts([]); // Set products to an empty array in case of error
         }
-      }
-         getProducts()
-         console.log(products)
-  }, [])
+      };
+  
+      getProducts(); // Correct placement for calling getProducts
+    }, [cat]); 
+  
+    console.log(products); 
 
   useEffect(() => {
     if (cat && filters) {
@@ -44,6 +44,7 @@ const Products = ({cat, filters, sort}) => {
         )
       );
       console.log(filteredProducts);
+
     } else {
       setFilteredProducts(products);
     }
@@ -65,14 +66,13 @@ const Products = ({cat, filters, sort}) => {
 
   return (
     <Container>
-      {products.map((item)=>(
+      {popularProduct.map((item)=>(
         <Product item={item} key={item.id}  />
+
       ))}
 
-    </Container>
-  )
-}
+</Container>
+  )}
 
-export default Products
-
-
+  
+  export default Products
