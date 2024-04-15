@@ -3,8 +3,8 @@ const mongoose = require ("mongoose")
 
 const ProductSchema= new mongoose.Schema(
     {
-        product_id:{type:String, required:true,unique:true},
-        title:{type:String, required:true, unique:true},
+        product_id:{type:String, required:true},
+        title:{type:String, required:true},
         desc:{type:String, required:true, unique:true},
         categories:{type:Array, required:true },
         price:{type:Number,required:true},

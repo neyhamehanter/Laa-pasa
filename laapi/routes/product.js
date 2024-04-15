@@ -6,16 +6,24 @@ const {verifyToken,verifyTokenAndAdmin ,verifyTokenAndAuthorization } = require(
 
 
 //Create
- router.post("/", verifyTokenAndAdmin, async (req,res)=>{
-    const newProduct = new Product(req.body)
+ router.post("/", verifyTokenAndAdmin, async(req, res)=>{
+  try{
+    const {product_id, title, desc, categories, price, image} = req.body;
+    if(!image)
+    return res.status(400).json({msg: "No images uploaded"})
 
-    try{
-        const savedProduct =await newProduct.save();
-        res.status(200).json(savedProduct)
-    }catch(err){
-        res.status(500).json(err)
-    }
+    const product = await Product.findOne({product_id})
+    if(product)
+    return res.status(400).json({msg: "The product already exists"})
 
+    const newProduct = new Product({product_id, title, desc, categories, price, image})
+    await newProduct.save();
+
+    return res.status(200).json({msg:"Product created successfully"})
+  }catch(err){
+    res.status(500).json(err);
+
+  }
  })
 
 

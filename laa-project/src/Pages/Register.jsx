@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import reg from '../image/reg.jpg'
 import {mobile} from "../responsive"
+import { signup } from '../Auth'
 
 
 const MainContainer = styled.div`
@@ -80,6 +81,13 @@ cursor:pointer;
 `
 
 const Register = () => {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+    error: "",
+    success: false,
+  });
   return (
     <MainContainer>
       <BackgroundImage />
