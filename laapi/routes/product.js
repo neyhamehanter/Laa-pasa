@@ -6,7 +6,7 @@ const {verifyToken,verifyTokenAndAdmin ,verifyTokenAndAuthorization } = require(
 
 
 //Create
- router.post("/", verifyTokenAndAdmin, async(req, res)=>{
+ router.post("/",  async(req, res)=>{
   try{
     const {product_id, title, desc, categories, price, image} = req.body;
     if(!image)

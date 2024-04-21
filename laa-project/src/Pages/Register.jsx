@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import reg from '../image/reg.jpg'
 import {mobile} from "../responsive"
 import { signup } from '../Auth'
+import axios from 'axios'
+
 
 
 const MainContainer = styled.div`
@@ -81,24 +83,40 @@ cursor:pointer;
 `
 
 const Register = () => {
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-    error: "",
-    success: false,
-  });
+  const [user, setUser] = useState({username:"",email:"",password:"",confirmPassword:""})
+
+  const onChangeInput = e =>{
+    const {name, value} = e.target;
+    setUser({...user, [name]:value})
+  }
+
+  const registerSubmit = async e=>{
+    e.preventDefault();
+    try{
+      const response = await axios.post('http://localhost:8000/api/register', {...user})
+      localStorage.setItem('firstLogin', true)
+      window.location.href="/"
+      alert(response.data.msg)
+    }catch(err){
+  
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        alert(err.response.data.msg); // Accessing .msg from server response
+   
+
+    }
+  }
+  
   return (
     <MainContainer>
       <BackgroundImage />
         <Wrapper>
-            <Title>Create An Account</Title>
-              <Form>
-                <Input placeholder="name"/>
-                <Input placeholder="last name"/>
-                <Input placeholder="email"/>
-                <Input placeholder="password"/>
-                <Input placeholder="confirm password"/><br/>
+            
+              <Form onSubmit={registerSubmit}>
+                <Input type="text" placeholder="username" name="username" value={user.username} onChange={onChangeInput}/>
+                <Input type="email" placeholder="email" name="email" value={user.email} onChange={onChangeInput}/>
+                <Input type="password" placeholder="password" name='password' value={user.password} onChange={onChangeInput}/>
+                <Input type="password" placeholder="confirm password" name='confirmPassword' value={user.confirmPassword} onChange={onChangeInput}/>
                 <Agreement> By creating an account,I consent to the processing of my personall data in accordance with the <b>PRIVACY POLICY</b></Agreement><br/>
               <Button>Create</Button>
               </Form>

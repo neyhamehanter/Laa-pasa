@@ -3,8 +3,9 @@ import { Navigate,Outlet } from "react-router-dom";
 import {isAuthenticated} from "."
 
 const PrivateRoute=()=>(
-    isAuthenticated() && isAuthenticated().user.role=== 1 ?
+    isAuthenticated() && isAuthenticated().user.role === 0 ?
     <>
+        
     <AdminSidebar/>
     <Outlet/>
     </>

@@ -3,48 +3,42 @@ const User = require("../models/User");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
-// Register
+//REGISTER
 router.post("/register", async (req, res) => {
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
     password: CryptoJS.AES.encrypt(
       req.body.password,
-      process.env.PASSWORD_SEC
+      process.env.PASS_SEC
     ).toString(),
   });
+
   try {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
-    console.log(err);
+    
     res.status(500).json(err);
   }
 });
 
-// Login
+//LOGIN
+
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    
-    if (!user) {
-      // Added return statement
-      return res.status(401).json("Wrong credentials!");
-    }
+    !user && res.status(401).json("Wrong credentials!");
 
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
-      process.env.PASSWORD_SEC
+      process.env.PASS_SEC
     );
 
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-    if (OriginalPassword !== req.body.password) {
-      // Added return statement
-      return res.status(401).json("Wrong credentials!");
-    }
-
-    // Using token
+    OriginalPassword !== req.body.password &&
+      res.status(401).json("Wrong credentials!");
     const accessToken = jwt.sign(
       {
         id: user._id,

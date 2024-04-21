@@ -21,9 +21,14 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
       // console.log("loginFailure reducer triggered", state);
+    },
+    logout: (state) => {
+      state.currentUser = null;
+      state.isFetching = false;
+      state.error = false; // Reset the error as well
     }
   }
 });
 
-export const { loginStart, loginSuccess, loginFailure } = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure,logout } = userSlice.actions;
 export default userSlice.reducer;

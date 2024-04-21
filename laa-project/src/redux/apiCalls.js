@@ -1,5 +1,5 @@
-import { publicRequest } from "../Pages/requestMethods";
-import { loginStart, loginSuccess,loginFailure } from "./userRedux";
+import { publicRequest } from "../requestMethods";
+import { loginStart, loginSuccess,loginFailure,logout } from "./userRedux";
 
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
@@ -8,6 +8,6 @@ export const login = async (dispatch, user) => {
         const res = await publicRequest.post("/auth/login", user);
         dispatch(loginSuccess(res.data));
     } catch (err) {
-        dispatch(loginFailure()); 
+        dispatch(loginFailure(err.response?.data?.message || "An unexpected error occurred")); 
     }
 };

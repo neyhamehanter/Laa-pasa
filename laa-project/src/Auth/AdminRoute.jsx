@@ -1,19 +1,16 @@
 import React from "react";
  import AdminSidebar from '../admin/AdminSidebar'
 import { Navigate,Outlet } from "react-router-dom";
-import {isAuthenticated} from "."
+import { isAuthenticated } from "../Auth";
 
 const AdminRoute=()=>(
-    isAuthenticated() && isAuthenticated().user.role=== 1 ?
+    isAuthenticated() && isAuthenticated().user.role === 1 ?
     <>
-    <AdminSidebar/>
+    {/* <AdminSidebar/> */}
     <Outlet/>
     </>
      :(
-        <Navigate to='/signin'/>
-        
+        <Navigate to='/signin'/> 
     )
-)
-
-
+);
 export default AdminRoute 

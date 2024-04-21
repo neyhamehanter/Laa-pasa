@@ -4,6 +4,9 @@ import { Search, AddShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import {mobile} from "../responsive"
 import { useSelector } from 'react-redux';
+import { logout } from "../redux/userRedux";
+import { useDispatch } from 'react-redux';
+
 
 // Styled components
 const Container = styled.div`
@@ -88,9 +91,13 @@ const MenuItem = styled.div`
 
 // Navbar component
 const Navbar = () => {
-  const quantity = useSelector(state=>state.cart.quantity)
+  const quantity = useSelector(state=>state.cart.quantity);
+  //const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
 
-  
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action
+  };
   return (
     <Container>
       <Wrapper>
@@ -104,8 +111,17 @@ const Navbar = () => {
           <Logo>LA-PASA.</Logo>
         </Center>
         <Right>
-          <MenuItem>Register</MenuItem>
-          <MenuItem>SignIn</MenuItem>
+          
+            <>
+              <MenuItem>Profile</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </>
+           
+            <>
+              <MenuItem>Register</MenuItem>
+              <MenuItem>SignIn</MenuItem>
+            </>
+          
           <MenuItem>
             <Badge badgeContent={quantity} color="secondary">
               <AddShoppingCartOutlined />

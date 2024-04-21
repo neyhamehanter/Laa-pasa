@@ -6,7 +6,7 @@ import Newsletter from "../Components/Newsletter";
 import { Footer } from "../Components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
-import { publicRequest } from "./requestMethods";
+import { publicRequest } from "../requestMethods";
 import { mobile } from "../responsive";
 //import bst from '../image/bst.jpg' if used
 import { addProduct } from "../redux/cartRedux";
