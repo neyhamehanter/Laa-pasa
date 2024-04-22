@@ -10,6 +10,7 @@ const productRoute = require('./routes/product');
 const upload = require('./routes/upload');
 const user = require("./routes/user");
 const category = require("./routes/category");
+const recipe = require("./routes/recipes");
 const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
@@ -23,7 +24,8 @@ app.use(fileUpload({
 app.use("/api",productRoute);
 app.use("/api",upload);
 app.use("/api", user);
-app.use("/api", category)
+app.use("/api", category);
+app.use("/api", recipe);
 
 
 try {

@@ -16,6 +16,9 @@ import sprib from "./image/sprib.jpg";
 import gc from "./image/gc.jpg";
 import { Filter } from "@mui/icons-material";
 
+
+import porkchoila from "./videos/porkchoila.mp4"
+
 export const sliderItems = [
   {
     id: 1,
@@ -127,4 +130,13 @@ export const categories = [
         createdAt: "2023-02-20"
       },
     ];
+
+
+
+    export const Recipe = {
+      title: "Pork Choila",
+      desc: "Belly pork choila"
+
+    };
+    
     

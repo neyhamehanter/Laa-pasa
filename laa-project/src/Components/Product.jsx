@@ -87,8 +87,10 @@ const StockStatus = styled.span`
 `;
 
 const Product = ({ item }) => {
-  // Placeholder for stock check functionality
-  const isOutOfStock = false; // Placeholder: Replace with actual check e.g., item.countInStock === 0
+  
+  const isOutOfStock = false; 
+
+  
 
   // Function to handle adding to cart
   const handleAddToCartClick = () => {

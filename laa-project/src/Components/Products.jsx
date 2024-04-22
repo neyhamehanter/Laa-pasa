@@ -25,11 +25,11 @@ const Products = ({cat, filters, sort}) => {
           setProducts(res.data)
         } catch (err) {
           console.error(err);
-          setProducts([]); // Set products to an empty array in case of error
+          setProducts([]); 
         }
       };
   
-      getProducts(); // Correct placement for calling getProducts
+      getProducts(); 
     }, [cat]); 
   
     console.log(products); 
